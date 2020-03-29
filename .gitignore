@@ -1,0 +1,8 @@
+Unity/ShaderGraphTestsProject/Assembly-CSharp.csproj
+Unity/ShaderGraphTestsProject/.vs/
+Unity/ShaderGraphTestsProject/ShaderGraphTestsProject.sln
+Unity/ShaderGraphTestsProject/Library/
+Unity/ShaderGraphTestsProject/Logs/
+Unity/ShaderGraphTestsProject/obj/
+Unity/ShaderGraphTestsProject/Temp/
+*.meta
