@@ -1,14 +1,13 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Unlit/SimpleUnlitTexturedShader"
+Shader "Unlit/SingleColor"
 {
 	Properties
 	{
 		// we have removed support for texture tiling/offset,
 		// so make them not be displayed in material inspector
 		[NoScaleOffset] _MainTex("Texture", 2D) = "white" {}
+		_Color("Main Color", Color) = (1,1,1,1)
 	}
 		SubShader
 	{
@@ -40,25 +39,21 @@ Shader "Unlit/SimpleUnlitTexturedShader"
 		v2f o;
 		// transform position to clip space
 		// (multiply with model*view*projection matrix)
-		// o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
 		o.vertex = UnityObjectToClipPos(v.vertex);
 		// just pass the texture coordinate
 		o.uv = v.uv;
 		return o;
 	}
 
-	// texture we will sample
-	sampler2D _MainTex;
+	// color from the material
+	fixed4 _Color;
 
-	// pixel shader; returns low precision ("fixed4" type)
-	// color ("SV_Target" semantic)
-	fixed4 frag(v2f i) : SV_Target
+	// pixel shader, no inputs needed
+	fixed4 frag() : SV_Target
 	{
-		// sample texture and return it
-		fixed4 col = tex2D(_MainTex, i.uv);
-	return col;
+		return _Color; // just return it
 	}
-		ENDCG
+	ENDCG
 	}
 	}
 }
